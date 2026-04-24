@@ -53,7 +53,27 @@ public class Alien {
 		this.color = color;
 		this.precioCuerpo = 0.2 * this.tamanio;
 		this.precioExtremidad = 0.1 * this.tamanio;
-		this.precioOjo = 0.05 * tamanio;
+		this.precioOjo = 0.05 * this.tamanio;
+	}
+
+	public boolean agregarBrazos(int cantidadBrazos) {
+		int limitePermitido = numeroBrazos + numeroPies;
+		if (limitePermitido + cantidadBrazos <= 10) {
+			numeroBrazos = numeroBrazos + cantidadBrazos;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean agregarPies(int cantidadPies) {
+		int limitePermitido = numeroBrazos + numeroPies;
+		if (limitePermitido + cantidadPies <= 10) {
+			numeroPies = numeroPies + cantidadPies;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public void imprimir() {
