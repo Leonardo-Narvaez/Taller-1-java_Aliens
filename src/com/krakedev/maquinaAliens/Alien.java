@@ -9,6 +9,7 @@ public class Alien {
 	private double precioExtremidad;
 	private double precioOjo;
 	private double precioCuerpo;
+	private double precioTotal = 0;
 
 	public int getTamanio() {
 		return tamanio;
@@ -16,6 +17,10 @@ public class Alien {
 
 	public String getColor() {
 		return color;
+	}
+
+	public double getPrecioTotal() {
+		return precioTotal;
 	}
 
 	public int getNumeroOjos() {
@@ -54,12 +59,14 @@ public class Alien {
 		this.precioCuerpo = 0.2 * this.tamanio;
 		this.precioExtremidad = 0.1 * this.tamanio;
 		this.precioOjo = 0.05 * this.tamanio;
+		calcularPrecioTotal();
 	}
 
 	public boolean agregarBrazos(int cantidadBrazos) {
 		int limitePermitido = numeroBrazos + numeroPies;
 		if (limitePermitido + cantidadBrazos <= 10) {
 			numeroBrazos = numeroBrazos + cantidadBrazos;
+			calcularPrecioTotal();
 			return true;
 		} else {
 			return false;
@@ -70,10 +77,35 @@ public class Alien {
 		int limitePermitido = numeroBrazos + numeroPies;
 		if (limitePermitido + cantidadPies <= 10) {
 			numeroPies = numeroPies + cantidadPies;
+			calcularPrecioTotal();
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	public boolean agregarOjos(int cantidadOjos) {
+		if (tamanio >= 5 && tamanio <= 10 && cantidadOjos <= 3) {
+			numeroOjos = cantidadOjos;
+			calcularPrecioTotal();
+			return true;
+		} else if (tamanio > 10 && tamanio <= 20 && cantidadOjos > 3 && cantidadOjos <= 5) {
+			numeroOjos = cantidadOjos;
+			calcularPrecioTotal();
+			return true;
+		} else if (tamanio > 20 && tamanio <= 30 && cantidadOjos > 5 && cantidadOjos <= 7) {
+			numeroOjos = cantidadOjos;
+			calcularPrecioTotal();
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void calcularPrecioTotal() {
+		double valorExtremidades = (numeroBrazos + numeroPies) * precioExtremidad;
+		double valorOjos = numeroOjos + precioOjo;
+		precioTotal = valorExtremidades + valorOjos + precioCuerpo;
 	}
 
 	public void imprimir() {
@@ -85,6 +117,7 @@ public class Alien {
 		System.out.println("Precio de extremidad: " + precioExtremidad);
 		System.out.println("Precio de ojo: " + precioOjo);
 		System.out.println("Precio de cuerpo: " + precioCuerpo);
+		System.out.println("Precio total: " + precioTotal);
 
 	}
 }
